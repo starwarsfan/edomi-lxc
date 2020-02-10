@@ -1,0 +1,4 @@
+*.iml
+.idea
+.dropbox.attr
+tmp/
