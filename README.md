@@ -17,6 +17,36 @@ For more information please refer to [Official website](http://www.edomi.de/) or
 4. Make setup script executable and start it
    ```
    cd /root/edomi
-   chmod +x setupEdomi.sh
+   chmod +x *.sh
    ./setupEdomi.sh
    ```
+Now Edomi is installed and will be started with the next reboot.
+
+### Prepare template
+If setup is finished, the system can be prepared using the script
+```
+./prepareTemplate.sh
+```
+
+This script will cleanup the yum package cache and remove `/etc/resolv.conf`
+as well as `/etc/hostname`. You can shutdown the system afterwards to go
+ahead with the template creation steps.
+
+### Create template
+After the container is powered off, perform these steps on the Proxmox
+web ui:
+1. Remove all network devices from the container
+2. Create backup of container with
+   * Mode: Stop
+   * Compression: GZip
+
+Now login to the ProxMox host using `ssh`. You will find the template archive
+afterwards on the ProxMox host at `/var/lib/vz/dump/vzdump-lxc-<id>-<iso-timestamp>.tar.gz`.
+To use it as a template right on this system, the archive needs to be moved  
+to another location:
+```
+cd /var/lib/vz
+mv dump/vzdump-lxc-<id>-<iso-timestamp>.tar.gz template/cache/my-edomi-template.tar.gz
+```
+After this step the template will be available during container creation
+using ProxMox web ui.
