@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # ============================================================================
 #
 # Created 2020-02-10 by StarWarsFan
@@ -140,6 +139,9 @@ sed -i \
     -e '/Conflicts=getty/a echo "Restart=on-success" >> /etc/systemd/system/edomi.service\necho "SuccessExitStatus=SIGHUP" >> /etc/systemd/system/edomi.service' \
     -e '/ExecStart/a echo "ExecStop=/bin/sh /usr/local/edomi/main/stop.sh" >> /etc/systemd/system/edomi.service' \
     install.sh
+
+cp ${ownLocation}/scripts/stop.sh /usr/local/edomi/main/stop.sh
+chmod +x /usr/local/edomi/main/stop.sh
 
 # Start Edomi installation and choose "7" as install version
 echo 7 | ./install.sh
