@@ -14,13 +14,8 @@ cd ${ownLocation}
 
 # Some defaults
 EDOMI_VERSION=EDOMI_201.tar
-ROOT_PASS=123456
 EDOMI_EXTRACT_PATH=/tmp/edomi/
 EDOMI_ARCHIVE=/tmp/edomi.tar
-START_SCRIPT=/root/start.sh
-EDOMI_BACKUP_DIR=/var/edomi-backups
-EDOMI_DB_DIR=/var/lib/mysql
-EDOMI_INSTALL_DIR=/usr/local/edomi
 
 # Install what we need ;-)
 yum update -y
@@ -63,7 +58,7 @@ yum install -y \
     php-xml \
     php-zip
 
-# Telegram-LBS
+# For Telegram-LBS
 cd /tmp
 wget --no-check-certificate https://getcomposer.org/installer
 php installer
@@ -75,18 +70,18 @@ mv core php-telegram-bot
 cd php-telegram-bot
 composer install
 
-# Mailer-LBS 19000587
+# For Mailer-LBS 19000587
 cd /usr/local/edomi/main/include/php/
 mkdir PHPMailer
 cd PHPMailer
 composer require phpmailer/phpmailer
 
-# Mosquitto-LBS
+# For Mosquitto-LBS
 mkdir -p /usr/lib64/php/modules/
 cp ${ownLocation}/php-modules/mosquitto.so /usr/lib64/php/modules/
 echo 'extension=mosquitto.so' > /etc/php.d/50-mosquitto.ini
 
-# MikroTik-LBS
+# For MikroTik-LBS
 yum -y update \
     nss
 yum clean all
@@ -129,6 +124,11 @@ tar -xf ${EDOMI_ARCHIVE} -C ${EDOMI_EXTRACT_PATH}
 cd ${EDOMI_EXTRACT_PATH}
 
 # Modify install script
+# - Remove firewall steps
+# - Remove SELinux modification
+# - Remove Grub modification
+# - Remove tty-force from systemd service creation
+# - Add Restart, SuccessExitStatus and ExecStop to systemd service creation
 sed -i \
     -e '/Firewall/d' \
     -e '/firewalld/d' \
@@ -138,6 +138,8 @@ sed -i \
     -e '/grub/d' \
     -e '/StandardInput=tty-force/d' \
     -e '/Conflicts=getty/a echo "Restart=on-success" >> /etc/systemd/system/edomi.service\necho "SuccessExitStatus=SIGHUP" >> /etc/systemd/system/edomi.service' \
+    -e '/ExecStart/a echo "ExecStop=/bin/sh /usr/local/edomi/main/stop.sh" >> /etc/systemd/system/edomi.service' \
     install.sh
 
+# Start Edomi installation and choose "7" as install version
 echo 7 | ./install.sh
