@@ -116,6 +116,7 @@ systemctl enable sshd
 localectl set-locale LANG=de_DE.utf8
 localectl set-x11-keymap de
 localectl set-keymap de-nodeadkeys
+timedatectl set-timezone Europe/Berlin
 
 # Get Edomi archive and extract it
 wget -O ${EDOMI_ARCHIVE} http://edomi.de/download/install/${EDOMI_VERSION}
