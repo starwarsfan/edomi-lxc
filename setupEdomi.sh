@@ -147,3 +147,8 @@ chmod +x /usr/local/edomi/main/stop.sh
 
 # Start Edomi installation and choose "7" as install version
 echo 7 | ./install.sh
+
+# Tweak some default settings
+sed -i \
+    -e 's#global_serverConsoleInterval=.*#global_serverConsoleInterval=false#' \
+    /usr/local/edomi/edomi.ini
