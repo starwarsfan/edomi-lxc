@@ -27,6 +27,7 @@ yum install -y \
     file \
     git \
     hostname \
+    htop \
     httpd \
     mariadb-server \
     mc \
