@@ -12,7 +12,7 @@ ownLocation="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd ${ownLocation}
 
 # Some defaults
-EDOMI_VERSION=EDOMI_201.tar
+EDOMI_VERSION=EDOMI_202.tar
 EDOMI_EXTRACT_PATH=/tmp/edomi/
 EDOMI_ARCHIVE=/tmp/edomi.tar
 
