@@ -79,6 +79,8 @@ composer require phpmailer/phpmailer
 # For Mosquitto-LBS
 mkdir -p /usr/lib64/php/modules/
 cp ${ownLocation}/php-modules/mosquitto.so /usr/lib64/php/modules/
+cp ${ownLocation}/mysql-modules/*          /usr/lib64/mysql/
+
 echo 'extension=mosquitto.so' > /etc/php.d/50-mosquitto.ini
 
 # For MikroTik-LBS
@@ -147,6 +149,9 @@ chmod +x /usr/local/edomi/main/stop.sh
 
 # Start Edomi installation and choose "7" as install version
 echo 7 | ./install.sh
+
+# Enable lib_mysqludf_sys
+mysql -u root mysql < ${ownLocation}/scripts/lib_mysqludf_sys.sql
 
 # Tweak some default settings
 sed -i \
