@@ -79,7 +79,8 @@ composer require phpmailer/phpmailer
 # For Mosquitto-LBS
 mkdir -p /usr/lib64/php/modules/
 cp ${ownLocation}/php-modules/mosquitto.so /usr/lib64/php/modules/
-cp ${ownLocation}/mysql-modules/*          /usr/lib64/mysql/
+cp ${ownLocation}/mysql-modules/*          /usr/lib64/mysql/plugin/
+chmod +x /usr/lib64/mysql/plugin/lib_mysqludf_*
 
 echo 'extension=mosquitto.so' > /etc/php.d/50-mosquitto.ini
 
@@ -151,7 +152,9 @@ chmod +x /usr/local/edomi/main/stop.sh
 echo 7 | ./install.sh
 
 # Enable lib_mysqludf_sys
+systemctl start mariadb
 mysql -u root mysql < ${ownLocation}/scripts/lib_mysqludf_sys.sql
+systemctl stop mariadb
 
 # Tweak some default settings
 sed -i \
