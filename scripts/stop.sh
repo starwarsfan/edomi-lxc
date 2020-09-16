@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 edomipid() {
-    echo `ps -ef | grep "/usr/local/edomi/main/proc/[p]roc_main.php" | awk '{print $2}'`
+    echo $(ps -ef | grep "/usr/local/edomi/main/proc/[p]roc_main.php" | awk '{print $2}')
 }
 
 wait=10
@@ -21,7 +21,7 @@ while [[ "x$PID" != x ]]; do
     echo -n "."
     if [[ "$s" -ge ${wait} ]]; then
         echo "Edomi did not terminate, hard killing"
-        kill -9 ${PID}
+        kill -9 "${PID}"
         exit 0;
     fi
     sleep 1
