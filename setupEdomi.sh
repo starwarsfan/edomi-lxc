@@ -61,6 +61,13 @@ yum install -y \
     php-xml \
     php-zip
 
+# Alexa
+ln -s /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem /etc/pki/tls/cacert.pem
+sed -i \
+    -e '/\[curl\]/ a curl.cainfo = /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem' \
+    -e '/\[openssl\] a openssl.cafile = /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem' \
+    /etc/php.ini
+
 # For Telegram-LBS
 cd /tmp
 wget --no-check-certificate https://getcomposer.org/installer
