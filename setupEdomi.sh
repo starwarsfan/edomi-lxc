@@ -35,6 +35,7 @@ yum install -y \
     mosquitto \
     mosquitto-devel \
     nano \
+    net-snmp-utils \
     net-tools \
     ntp \
     openssh-server \
@@ -49,11 +50,13 @@ yum-config-manager \
     --enable remi-php72
 yum install -y \
     php \
+    php-curl \
     php-gd \
     php-mbstring \
     php-mysql \
     php-process \
     php-soap \
+    php-snmp \
     php-ssh2 \
     php-xml \
     php-zip
