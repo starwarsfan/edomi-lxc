@@ -93,6 +93,12 @@ git clone https://github.com/jonofe/Net_RouterOS
 cd Net_RouterOS
 composer install
 
+# Philips HUE-LBS
+cd /usr/local/edomi/main/include/php
+git clone https://github.com/sqmk/Phue
+cd Phue
+composer install
+
 # Edomi
 systemctl enable ntpd
 systemctl enable vsftpd
