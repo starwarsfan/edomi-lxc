@@ -43,6 +43,7 @@ yum install -y \
     ntp \
     oathtool \
     openssh-server \
+    openssl \
     tar \
     unzip \
     vsftpd \
@@ -119,6 +120,11 @@ cp ${ownLocation}/mysql-modules/*          /usr/lib64/mysql/plugin/
 chmod +x /usr/lib64/mysql/plugin/lib_mysqludf_*
 
 echo 'extension=mosquitto.so' > /etc/php.d/50-mosquitto.ini
+
+# Alexa Control 19000809
+cd /etc/ssl/certs
+wget https://curl.haxx.se/ca/cacert.pem -O /etc/ssl/certs/cacert-Mozilla.pem
+echo "curl.cainfo=/etc/ssl/certs/cacert-Mozilla.pem" >> /etc/php.d/curl.ini
 
 # Edomi
 systemctl enable ntpd
