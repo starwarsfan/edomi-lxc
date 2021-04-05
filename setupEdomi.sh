@@ -41,6 +41,7 @@ yum install -y \
     net-tools \
     nss \
     ntp \
+    oathtool \
     openssh-server \
     tar \
     unzip \
