@@ -172,8 +172,8 @@ sed -i \
 cp ${ownLocation}/scripts/stop.sh /usr/local/edomi/main/stop.sh
 chmod +x /usr/local/edomi/main/stop.sh
 
-# Start Edomi installation and choose "7" as install version
-echo 7 | ./install.sh
+# Start Edomi installation and choose "e" as install version
+echo e | ./install.sh
 
 # Enable lib_mysqludf_sys
 systemctl start mariadb
