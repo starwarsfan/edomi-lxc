@@ -177,7 +177,7 @@ echo 7 | ./install.sh
 
 # Enable lib_mysqludf_sys
 systemctl start mariadb
-mysql -u root mysql < ${ownLocation}/scripts/lib_mysqludf_sys.sql
+mysql -u root mysql < ${ownLocation}/scripts/installdb.sql
 systemctl stop mariadb
 
 # Tweak some default settings
