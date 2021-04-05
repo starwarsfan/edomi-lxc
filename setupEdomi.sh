@@ -75,20 +75,38 @@ sed -i \
     -e '/\[openssl\] a openssl.cafile = /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem' \
     /etc/php.ini
 
-# For Telegram-LBS
+# Get composer
 cd /tmp
-wget --no-check-certificate https://getcomposer.org/installer
-php installer
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === file_get_contents('https://composer.github.io/installer.sig')) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
 mv composer.phar /usr/local/bin/composer
 mkdir -p /usr/local/edomi/main/include/php
+
+# For Telegram-LBS 19000303 / 19000304
 cd /usr/local/edomi/main/include/php
 git clone https://github.com/php-telegram-bot/core
 mv core php-telegram-bot
 cd php-telegram-bot
 composer install
 
-# For Mailer-LBS 19000587
-cd /usr/local/edomi/main/include/php/
+# MikroTik RouterOS API 19001059
+cd /usr/local/edomi/main/include/php
+git clone https://github.com/jonofe/Net_RouterOS
+cd Net_RouterOS
+composer install
+
+# Philips HUE Bridge 19000195
+# As long as https://github.com/sqmk/Phue/pull/143 is not merged, fix phpunit via sed
+cd /usr/local/edomi/main/include/php
+git clone https://github.com/sqmk/Phue
+cd Phue
+sed -i "s/PHPUnit/phpunit/g" composer.json
+composer install
+
+# Mailer-LBS 19000587
+cd /usr/local/edomi/main/include/php
 mkdir PHPMailer
 cd PHPMailer
 composer require phpmailer/phpmailer
@@ -101,29 +119,12 @@ chmod +x /usr/lib64/mysql/plugin/lib_mysqludf_*
 
 echo 'extension=mosquitto.so' > /etc/php.d/50-mosquitto.ini
 
-# For MikroTik-LBS
-yum -y update \
-    nss
-yum clean all
-cd /usr/local/edomi/main/include/php
-git clone https://github.com/jonofe/Net_RouterOS
-cd Net_RouterOS
-composer install
-
-# Philips HUE-LBS
-cd /usr/local/edomi/main/include/php
-git clone https://github.com/sqmk/Phue
-cd Phue
-composer install
-
 # Edomi
 systemctl enable ntpd
 systemctl enable vsftpd
 systemctl enable httpd
 systemctl enable mariadb
 
-rm -f /etc/vsftpd/ftpusers \
-      /etc/vsftpd/user_list
 sed -e "s/listen=.*$/listen=YES/g" \
     -e "s/listen_ipv6=.*$/listen_ipv6=NO/g" \
     -e "s/userlist_enable=.*/userlist_enable=NO/g" \
