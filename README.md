@@ -21,7 +21,6 @@ For more information please refer to [Official website](http://www.edomi.de/) or
 5. Make setup script executable and start it
    ```
    cd /root/edomi-lxc
-   chmod +x *.sh
    ./setupEdomi.sh
    ```
 Now Edomi is installed and will be started with the next reboot.
