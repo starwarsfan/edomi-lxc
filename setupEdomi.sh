@@ -24,6 +24,8 @@ yum install -y \
 yum update -y
 yum install -y \
     ca-certificates \
+    dos2unix \
+    expect \
     file \
     git \
     hostname \
@@ -37,6 +39,7 @@ yum install -y \
     nano \
     net-snmp-utils \
     net-tools \
+    nss \
     ntp \
     openssh-server \
     tar \
@@ -47,19 +50,23 @@ yum install -y \
 yum install -y \
     http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 yum-config-manager \
-    --enable remi-php72
+    --enable remi-php74
 yum install -y \
     php \
     php-curl \
     php-gd \
+    php-json \
     php-mbstring \
     php-mysql \
     php-process \
-    php-soap \
     php-snmp \
+    php-soap \
     php-ssh2 \
     php-xml \
-    php-zip
+    php-zip \
+yum clean all
+rm -f /etc/vsftpd/ftpusers \
+      /etc/vsftpd/user_list
 
 # Alexa
 ln -s /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem /etc/pki/tls/cacert.pem
