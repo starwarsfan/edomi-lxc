@@ -7,16 +7,20 @@ For more information please refer to [Official website](http://www.edomi.de/) or
 ### Configure container
 
 1. Create container from CentOS 7 template
-2. Install ssh
+2. Install ssh and git
    ```
-   yum install -y openssh-server
+   yum install -y openssh-server git
    systemctl enable sshd
    systemctl start sshd
    ```
-3. Copy the whole content of this Git repository to `/root/edomi/`
-4. Make setup script executable and start it
+3. Clone this Git repository to `/root/edomi-lxc/`
    ```
-   cd /root/edomi
+   cd /root/
+   git clone https://github.com/starwarsfan/edomi-lxc
+   ```
+5. Make setup script executable and start it
+   ```
+   cd /root/edomi-lxc
    chmod +x *.sh
    ./setupEdomi.sh
    ```
