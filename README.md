@@ -45,7 +45,7 @@ web ui:
 
 Now login to the ProxMox host using `ssh`. You will find the template archive
 afterwards on the ProxMox host at `/var/lib/vz/dump/vzdump-lxc-<id>-<iso-timestamp>.tar.gz`.
-To use it as a template right on this system, the archive needs to be moved  
+To use it as a template right on this system, the archive needs to be moved
 to another location:
 ```
 cd /var/lib/vz
