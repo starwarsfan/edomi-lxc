@@ -94,10 +94,10 @@ cd php-telegram-bot
 composer install
 
 # MikroTik RouterOS API 19001059
-cd /usr/local/edomi/main/include/php
-git clone https://github.com/jonofe/Net_RouterOS
-cd Net_RouterOS
-composer install
+#cd /usr/local/edomi/main/include/php
+#git clone https://github.com/jonofe/Net_RouterOS
+#cd Net_RouterOS
+#composer install
 
 # Philips HUE Bridge 19000195
 # As long as https://github.com/sqmk/Phue/pull/143 is not merged, fix phpunit via sed
