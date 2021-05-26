@@ -194,4 +194,5 @@ systemctl stop mariadb
 # Tweak some default settings
 sed -i \
     -e 's#global_serverConsoleInterval=.*#global_serverConsoleInterval=false#' \
+    -e "s#global_serverIP=.*#global_serverIP=''#" \
     /usr/local/edomi/edomi.ini
