@@ -1,4 +1,9 @@
-# Details:
+# Releasenotes
+
+## v2.03.1
+* Löschen des Konfigurationseintrages global_serverIP am Ende der Template-Erstellung, damit die jeweils konfigurierte IP von Edomi beim Start automatisch ermittelt wird.
+
+## v2.03
 * Edomi 2.03
 * Container basiert auf offiziellem Proxmox CentOS 7 Template
 * PHP 7.4 mit den folgenden Paketen:
