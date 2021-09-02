@@ -169,6 +169,7 @@ cd ${EDOMI_EXTRACT_PATH}
 # - Remove tty-force from systemd service creation
 # - Remove php 7.2 installation as 7.4 is already installed
 # - Add Restart, SuccessExitStatus and ExecStop to systemd service creation
+# - Replace default.target with multi-user.target
 sed -i \
     -e '/Firewall/d' \
     -e '/firewalld/d' \
@@ -180,8 +181,9 @@ sed -i \
     -e '/install php/d' \
     -e '/remi-/d' \
     -e '/epel-release-/d' \
-    -e '/Conflicts=getty/a echo "Restart=on-success" >> /etc/systemd/system/edomi.service\necho "SuccessExitStatus=SIGHUP" >> /etc/systemd/system/edomi.service' \
+    -e '/\[Service\]/a echo "Restart=on-success" >> /etc/systemd/system/edomi.service\necho "SuccessExitStatus=SIGHUP" >> /etc/systemd/system/edomi.service' \
     -e '/ExecStart/a echo "ExecStop=/bin/sh /usr/local/edomi/main/stop.sh" >> /etc/systemd/system/edomi.service' \
+    -e 's/default\.target/multi-user\.target/g' \
     install.sh
 
 cp ${ownLocation}/scripts/stop.sh /usr/local/edomi/main/stop.sh
