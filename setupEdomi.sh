@@ -144,6 +144,10 @@ yum reinstall -y \
     glibc-common
 yum clean all
 
+# Update systemd
+wget https://copr.fedorainfracloud.org/coprs/jsynacek/systemd-backports-for-centos-7/repo/epel-7/jsynacek-systemd-backports-for-centos-7-epel-7.repo -O /etc/yum.repos.d/jsynacek-systemd-centos-7.repo
+yum update -y systemd
+
 systemctl start sshd
 systemctl enable sshd
 
