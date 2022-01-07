@@ -1,5 +1,8 @@
 # Releasenotes
 
+## v2.03.2
+* Container basiert auf RockyLinux 8
+
 ## v2.03.1
 * Löschen des Konfigurationseintrages global_serverIP am Ende der Template-Erstellung, damit die jeweils konfigurierte IP von Edomi beim Start automatisch ermittelt wird.
 

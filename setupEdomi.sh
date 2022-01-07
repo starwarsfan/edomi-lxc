@@ -17,22 +17,24 @@ EDOMI_EXTRACT_PATH=/tmp/edomi/
 EDOMI_ARCHIVE=/tmp/edomi.tar
 
 # Install what we need ;-)
-yum update -y
-yum upgrade -y
-yum install -y \
+dnf module enable -y \
+    php:7.4
+dnf install -y \
     epel-release
-yum update -y
-yum install -y \
+dnf update -y
+dnf upgrade -y
+dnf clean all
+
+dnf install -y \
     ca-certificates \
+    chrony \
     dos2unix \
     expect \
     file \
     git \
     hostname \
-    htop \
     httpd \
     mariadb-server \
-    mc \
     mod_ssl \
     mosquitto \
     mosquitto-devel \
@@ -40,33 +42,28 @@ yum install -y \
     net-snmp-utils \
     net-tools \
     nss \
-    ntp \
     oathtool \
     openssh-server \
     openssl \
-    tar \
-    unzip \
-    vsftpd \
-    wget \
-    yum-utils
-yum install -y \
-    http://rpms.remirepo.net/enterprise/remi-release-7.rpm
-yum-config-manager \
-    --enable remi-php74
-yum install -y \
+    passwd \
     php \
     php-curl \
     php-gd \
     php-json \
     php-mbstring \
-    php-mysql \
+    php-mysqlnd \
     php-process \
     php-snmp \
     php-soap \
-    php-ssh2 \
     php-xml \
     php-zip \
-yum clean all
+    python2 \
+    tar \
+    unzip \
+    vsftpd \
+    wget \
+    dnf-utils
+dnf clean all
 rm -f /etc/vsftpd/ftpusers \
       /etc/vsftpd/user_list
 
@@ -127,7 +124,7 @@ wget https://curl.haxx.se/ca/cacert.pem -O /etc/ssl/certs/cacert-Mozilla.pem
 echo "curl.cainfo=/etc/ssl/certs/cacert-Mozilla.pem" >> /etc/php.d/curl.ini
 
 # Edomi
-systemctl enable ntpd
+systemctl enable chronyd
 systemctl enable vsftpd
 systemctl enable httpd
 systemctl enable mariadb
@@ -136,17 +133,6 @@ sed -e "s/listen=.*$/listen=YES/g" \
     -e "s/listen_ipv6=.*$/listen_ipv6=NO/g" \
     -e "s/userlist_enable=.*/userlist_enable=NO/g" \
     -i /etc/vsftpd/vsftpd.conf
-
-# Remove limitation to only one installed language
-sed -i "s/override_install_langs=.*$/override_install_langs=all/g" /etc/yum.conf
-yum update -y
-yum reinstall -y \
-    glibc-common
-yum clean all
-
-# Update systemd
-wget https://copr.fedorainfracloud.org/coprs/jsynacek/systemd-backports-for-centos-7/repo/epel-7/jsynacek-systemd-backports-for-centos-7-epel-7.repo -O /etc/yum.repos.d/jsynacek-systemd-centos-7.repo
-yum update -y systemd
 
 systemctl start sshd
 systemctl enable sshd
