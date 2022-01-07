@@ -108,7 +108,7 @@ composer install --no-interaction
 cd /usr/local/edomi/main/include/php
 mkdir PHPMailer
 cd PHPMailer
-composer require phpmailer/phpmailer
+composer require phpmailer/phpmailer --no-interaction
 
 # For Mosquitto-LBS
 mkdir -p /usr/lib64/php/modules/
