@@ -6,10 +6,11 @@ For more information please refer to [Official website](http://www.edomi.de/) or
 
 ### Configure container
 
-1. Create container from CentOS 7 template
+1. Create container from RockyLinux template
 2. Install ssh and git
    ```
-   yum install -y openssh-server git
+   dnf update -y
+   dnf install -y openssh-server git
    systemctl enable sshd
    systemctl start sshd
    ```
