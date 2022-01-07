@@ -88,13 +88,13 @@ cd /usr/local/edomi/main/include/php
 git clone https://github.com/php-telegram-bot/core
 mv core php-telegram-bot
 cd php-telegram-bot
-composer install
+composer install --no-interaction
 
 # MikroTik RouterOS API 19001059
 #cd /usr/local/edomi/main/include/php
 #git clone https://github.com/jonofe/Net_RouterOS
 #cd Net_RouterOS
-#composer install
+#composer install --no-interaction
 
 # Philips HUE Bridge 19000195
 # As long as https://github.com/sqmk/Phue/pull/143 is not merged, fix phpunit via sed
@@ -102,7 +102,7 @@ cd /usr/local/edomi/main/include/php
 git clone https://github.com/sqmk/Phue
 cd Phue
 sed -i "s/PHPUnit/phpunit/g" composer.json
-composer install
+composer install --no-interaction
 
 # Mailer-LBS 19000587
 cd /usr/local/edomi/main/include/php
