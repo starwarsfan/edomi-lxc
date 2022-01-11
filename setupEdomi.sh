@@ -127,6 +127,7 @@ echo "curl.cainfo=/etc/ssl/certs/cacert-Mozilla.pem" >> /etc/php.d/curl.ini
 systemctl enable chronyd
 systemctl enable vsftpd
 systemctl enable httpd
+systemctl enable php-fpm
 systemctl enable mariadb
 
 sed -e "s/listen=.*$/listen=YES/g" \
