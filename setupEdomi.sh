@@ -158,6 +158,7 @@ cd ${EDOMI_EXTRACT_PATH}
 # - Remove package install steps
 # - Add Restart, SuccessExitStatus and ExecStop to systemd service creation
 # - Replace default.target with multi-user.target
+# - Replace ntpd with chronyd
 sed -i \
     -e '/Firewall/d' \
     -e '/firewalld/d' \
@@ -173,6 +174,7 @@ sed -i \
     -e '/\[Service\]/a echo "Restart=on-success" >> /etc/systemd/system/edomi.service\necho "SuccessExitStatus=SIGHUP" >> /etc/systemd/system/edomi.service' \
     -e '/ExecStart/a echo "ExecStop=/bin/sh /usr/local/edomi/main/stop.sh" >> /etc/systemd/system/edomi.service' \
     -e 's/default\.target/multi-user\.target/g' \
+    -e 's/ntpd/chronyd/g' \
     install.sh
 
 cp ${ownLocation}/scripts/stop.sh /usr/local/edomi/main/stop.sh
