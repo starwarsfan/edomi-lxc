@@ -156,6 +156,7 @@ cd ${EDOMI_EXTRACT_PATH}
 # - Remove tty-force from systemd service creation
 # - Remove php 7.2 installation as 7.4 is already installed
 # - Remove package install steps
+# - Remove systemctl disable postfix (not installed)
 # - Add Restart, SuccessExitStatus and ExecStop to systemd service creation
 # - Replace default.target with multi-user.target
 # - Replace ntpd with chronyd
@@ -171,6 +172,7 @@ sed -i \
     -e '/rpm -Uvh/d' \
     -e '/remi-/d' \
     -e '/epel-release-/d' \
+    -e '/postfix/d' \
     -e '/\[Service\]/a echo "Restart=on-success" >> /etc/systemd/system/edomi.service\necho "SuccessExitStatus=SIGHUP" >> /etc/systemd/system/edomi.service' \
     -e '/ExecStart/a echo "ExecStop=/bin/sh /usr/local/edomi/main/stop.sh" >> /etc/systemd/system/edomi.service' \
     -e 's/default\.target/multi-user\.target/g' \
