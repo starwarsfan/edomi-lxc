@@ -157,6 +157,10 @@ cd ${EDOMI_EXTRACT_PATH}
 # - Remove php 7.2 installation as 7.4 is already installed
 # - Remove package install steps
 # - Remove systemctl disable postfix (not installed)
+# - Modify creation of systemd unit script to remove all calls of ntpd from
+#   /usr/local/edomi/main/start.sh and create dummy /dev/vcsa right before
+#   Edomi start. This is neccessary as a modified start.sh would be replaced
+#   by an Edomi update!
 # - Add Restart, SuccessExitStatus and ExecStop to systemd service creation
 # - Replace default.target with multi-user.target
 # - Replace ntpd with chronyd
@@ -174,6 +178,7 @@ sed -i \
     -e '/epel-release-/d' \
     -e '/postfix/d' \
     -e '/\[Service\]/a echo "Restart=on-success" >> /etc/systemd/system/edomi.service\necho "SuccessExitStatus=SIGHUP" >> /etc/systemd/system/edomi.service' \
+    -e '/Type=simple/a echo "ExecStartPre=-sed -i -e '/ntpd/d' /usr/local/edomi/main/start.sh" >> /etc/systemd/system/edomi.service\necho "ExecStartPre=-touch /dev/vcsa" >> /etc/systemd/system/edomi.service' \
     -e '/ExecStart/a echo "ExecStop=/bin/sh /usr/local/edomi/main/stop.sh" >> /etc/systemd/system/edomi.service' \
     -e 's/default\.target/multi-user\.target/g' \
     -e 's/ntpd/chronyd/g' \
