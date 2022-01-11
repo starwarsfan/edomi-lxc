@@ -154,6 +154,7 @@ cd ${EDOMI_EXTRACT_PATH}
 # - Remove Grub modification
 # - Remove tty-force from systemd service creation
 # - Remove php 7.2 installation as 7.4 is already installed
+# - Remove package install steps
 # - Add Restart, SuccessExitStatus and ExecStop to systemd service creation
 # - Replace default.target with multi-user.target
 sed -i \
@@ -165,6 +166,7 @@ sed -i \
     -e '/grub/d' \
     -e '/StandardInput=tty-force/d' \
     -e '/install php/d' \
+    -e '/rpm -Uvh/d' \
     -e '/remi-/d' \
     -e '/epel-release-/d' \
     -e '/\[Service\]/a echo "Restart=on-success" >> /etc/systemd/system/edomi.service\necho "SuccessExitStatus=SIGHUP" >> /etc/systemd/system/edomi.service' \
@@ -175,8 +177,11 @@ sed -i \
 cp ${ownLocation}/scripts/stop.sh /usr/local/edomi/main/stop.sh
 chmod +x /usr/local/edomi/main/stop.sh
 
-# Start Edomi installation and choose "e" as install version
-echo e | ./install.sh
+# Start Edomi installation, choose "2" as install version and accept to install on unknown system
+{
+   echo "2"
+   echo "j"
+} | ./install.sh
 
 # Enable lib_mysqludf_sys
 systemctl start mariadb
