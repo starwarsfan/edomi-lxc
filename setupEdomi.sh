@@ -58,6 +58,7 @@ dnf install -y \
     php-xml \
     php-zip \
     python2 \
+    sudo \
     tar \
     unzip \
     vsftpd \
