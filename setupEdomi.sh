@@ -124,6 +124,10 @@ cd /etc/ssl/certs
 wget https://curl.haxx.se/ca/cacert.pem -O /etc/ssl/certs/cacert-Mozilla.pem
 echo "curl.cainfo=/etc/ssl/certs/cacert-Mozilla.pem" >> /etc/php.d/curl.ini
 
+# Chrony on LXC container needs some special treatment
+# See https://bugs.launchpad.net/ubuntu/+source/chrony/+bug/1589780
+sed -i 's/OPTIONS="/OPTIONS="-x /g' /etc/sysconfig/chronyd
+
 # Edomi
 systemctl enable chronyd
 systemctl enable vsftpd
