@@ -179,7 +179,7 @@ sed -i \
     -e '/epel-release-/d' \
     -e '/postfix/d' \
     -e '/\[Service\]/a echo "Restart=on-success" >> /etc/systemd/system/edomi.service\necho "SuccessExitStatus=SIGHUP" >> /etc/systemd/system/edomi.service' \
-    -e '/Type=simple/a echo "ExecStartPre=-sed -i -e \"/ntpd/d\" /usr/local/edomi/main/start.sh" >> /etc/systemd/system/edomi.service\necho "ExecStartPre=-sed -i -e \"s@pkill -9 php.*@pkill -9 -x php@g\" /usr/local/edomi/main/start.sh" >> /etc/systemd/system/edomi.service\necho "ExecStartPre=-touch /dev/vcsa" >> /etc/systemd/system/edomi.service' \
+    -e '/Type=simple/a echo "ExecStartPre=-sed -i -e \\"/ntpd/d\\" /usr/local/edomi/main/start.sh" >> /etc/systemd/system/edomi.service\necho "ExecStartPre=-sed -i -e \\"s@pkill -9 php.*@pkill -9 -x php@g\\" /usr/local/edomi/main/start.sh" >> /etc/systemd/system/edomi.service\necho "ExecStartPre=-touch /dev/vcsa" >> /etc/systemd/system/edomi.service' \
     -e '/ExecStart/a echo "ExecStop=/bin/sh /usr/local/edomi/main/stop.sh" >> /etc/systemd/system/edomi.service' \
     -e 's/default\.target/multi-user\.target/g' \
     -e 's/ntpd/chronyd/g' \
