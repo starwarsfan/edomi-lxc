@@ -35,6 +35,7 @@ dnf install -y \
     hostname \
     httpd \
     mariadb-server \
+    mc \
     mod_ssl \
     mosquitto \
     mosquitto-devel \
@@ -208,3 +209,6 @@ sed -i \
     -e 's#global_serverConsoleInterval=.*#global_serverConsoleInterval=false#' \
     -e "s#global_serverIP=.*#global_serverIP=''#" \
     /usr/local/edomi/edomi.ini
+
+# Enable Lynx-like motion on Midnight Commander
+cp ${ownLocation}/configurations/.config /root/
