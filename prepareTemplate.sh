@@ -8,8 +8,8 @@
 echo -n "Prepare current system to create a LXC template? y/N: "
 read input
 if [[ "${input}" = "y" ]] || [[ "${input}" = "Y" ]] ; then
-    echo "Cleanup yum cache"
-    yum clean all
+    echo "Cleanup dnf (yum) cache"
+    dnf clean all
 
     echo "Removing /etc/resolv.conf"
     rm -f /etc/resolv.conf
