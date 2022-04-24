@@ -11,6 +11,12 @@ callDir=$(pwd)
 ownLocation="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd ${ownLocation}
 
+# Determine architecture
+if [ $(uname -m) = 'aarch64' ] ; then
+    ARCH_SUFFIX="-aarch64"
+fi
+
+
 # Some defaults
 EDOMI_VERSION=EDOMI_203.tar
 EDOMI_EXTRACT_PATH=/tmp/edomi/
@@ -114,8 +120,8 @@ composer require phpmailer/phpmailer --no-interaction
 
 # For Mosquitto-LBS
 mkdir -p /usr/lib64/php/modules/
-cp ${ownLocation}/php-modules/mosquitto.so /usr/lib64/php/modules/
-cp ${ownLocation}/mariadb-plugins/*          /usr/lib64/mariadb/plugin/
+cp ${ownLocation}/php-modules${ARCH_SUFFIX}/mosquitto.so /usr/lib64/php/modules/
+cp ${ownLocation}/mariadb-plugins${ARCH_SUFFIX}/*        /usr/lib64/mariadb/plugin/
 chmod +x /usr/lib64/php/modules/mosquitto.so /usr/lib64/mariadb/plugin/lib_mysqludf_*
 
 echo 'extension=mosquitto.so' > /etc/php.d/50-mosquitto.ini
