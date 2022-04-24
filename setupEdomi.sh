@@ -217,5 +217,5 @@ sed -i \
     /usr/local/edomi/edomi.ini
 
 # Enable Lynx-like motion on Midnight Commander
-mkdir -p /root/configurations/.config/mc
+mkdir -p /root/.config/mc
 cp ${ownLocation}/configurations/.config/mc/* /root/.config/mc/
