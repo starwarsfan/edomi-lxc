@@ -6,15 +6,16 @@ For more information please refer to [Official website](http://www.edomi.de/) or
 
 ### Configure container
 
-1. Create container from RockyLinux template
-2. Install ssh and git
+1. Create container from [RockyLinux template](https://uk.lxd.images.canonical.com/images/rockylinux/)
+2. ARMv8: See [Additional steps for ARMv8 on x86_64 host](#additional-steps-for-armv8-on-x86_64-host)
+3. Install ssh and git
    ```bash
    dnf update -y
    dnf install -y openssh-server git
    systemctl enable sshd
    systemctl start sshd
    ```
-3. Clone this Git repository to `/root/edomi-lxc/`
+4. Clone this Git repository to `/root/edomi-lxc/`
    ```bash
    cd /root/
    git clone https://github.com/starwarsfan/edomi-lxc
@@ -54,3 +55,16 @@ mv dump/vzdump-lxc-<id>-<iso-timestamp>.tar.gz template/cache/my-edomi-template.
 ```
 After this step the template will be available during container creation
 using ProxMox web ui.
+
+### Additional steps for ARMv8 on x86_64 host
+1. Do not start the container!
+2. Package `qemu-user-static` must be installed on host
+3. Copy `qemu-aarch64-static` into container filesystem and fix ownership/permission:
+   ```bash
+   lvdisplay    # Search LV path of container
+   mkdir /mnt/edomi-arm-container
+   mount <LV-Path> /mnt/edomi-arm-container
+   cp qemu-aarch64-static /mnt/edomi-arm-container/usr/bin/
+   chmod 755 /mnt/edomi-arm-container/usr/bin/qemu-aarch64-static
+   chown 100000:100000 /mnt/edomi-arm-container/usr/bin/qemu-aarch64-static
+   ```
