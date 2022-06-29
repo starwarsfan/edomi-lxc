@@ -155,6 +155,27 @@ localectl set-x11-keymap de
 localectl set-keymap de-nodeadkeys
 timedatectl set-timezone Europe/Berlin
 
+# Configure mariadb
+echo "key_buffer_size=256M" 			> /tmp/tmp.txt
+echo "sort_buffer_size=8M" 				>> /tmp/tmp.txt
+echo "read_buffer_size=16M" 			>> /tmp/tmp.txt
+echo "read_rnd_buffer_size=4M" 			>> /tmp/tmp.txt
+echo "myisam_sort_buffer_size=4M" 		>> /tmp/tmp.txt
+echo "join_buffer_size=4M" 				>> /tmp/tmp.txt
+echo "query_cache_limit=8M" 			>> /tmp/tmp.txt
+echo "query_cache_size=8M" 				>> /tmp/tmp.txt
+echo "query_cache_type=1" 				>> /tmp/tmp.txt
+echo "wait_timeout=28800" 				>> /tmp/tmp.txt
+echo "interactive_timeout=28800" 		>> /tmp/tmp.txt
+
+# STRICT_TRANS_TABLES (strict mode) needs to be disabled, otherwise statements
+# like this will fail because of the empty values:
+# INSERT INTO edomiProject.editLogicCmdList (targetid,cmd,cmdid1,cmdid2,cmdoption1,cmdoption2,cmdvalue1,cmdvalue2) \
+#                                    VALUES ('2',    '1', '101', '',    '',        '',        null,     null)
+echo "sql_mode=ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" >> /tmp/tmp.txt
+
+sed -i '/\[mysqld\]/r /tmp/tmp.txt' /etc/my.cnf.d/mariadb-server.cnf
+
 # Get Edomi archive and extract it
 wget -O ${EDOMI_ARCHIVE} http://edomi.de/download/install/${EDOMI_VERSION}
 mkdir -p ${EDOMI_EXTRACT_PATH}
