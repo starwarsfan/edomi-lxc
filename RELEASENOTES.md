@@ -1,5 +1,12 @@
 # Releasenotes
 
+## v2.03.5
+* Replace obsolete IP of Edomi update site with edomi.de
+* Streamline version with Docker image
+
+## v2.03.3
+* Apply missing mariadb configuration entries
+
 ## v2.03.2
 * Container basiert auf RockyLinux 8
 
