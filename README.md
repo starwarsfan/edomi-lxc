@@ -20,7 +20,7 @@ For more information please refer to [Official website](http://www.edomi.de/) or
    cd /root/
    git clone https://github.com/starwarsfan/edomi-lxc
    ```
-5. Make setup script executable and start it
+5. Start the setup script
    ```bash
    cd /root/edomi-lxc
    ./setupEdomi.sh
@@ -44,6 +44,9 @@ web ui:
 2. Create backup of container with
    * Mode: Stop
    * Compression: GZip
+   * Notes:
+     * `Edomi AMD64 LXC Template`
+     * `Edomi ARMv8 LXC Template`
 
 Now login to the ProxMox host using `ssh`. You will find the template archive
 afterwards on the ProxMox host at `/var/lib/vz/dump/vzdump-lxc-<id>-<iso-timestamp>.tar.gz`.
