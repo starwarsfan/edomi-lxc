@@ -235,6 +235,7 @@ systemctl stop mariadb
 sed -i \
     -e 's#global_serverConsoleInterval=.*#global_serverConsoleInterval=false#' \
     -e "s#global_serverIP=.*#global_serverIP=''#" \
+    -e "s/62\.75\.208\.51/edomi\.de/g" \
     /usr/local/edomi/edomi.ini
 
 # Enable Lynx-like motion on Midnight Commander
