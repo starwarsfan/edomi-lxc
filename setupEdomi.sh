@@ -16,7 +16,6 @@ if [ $(uname -m) = 'aarch64' ] ; then
     ARCH_SUFFIX="-aarch64"
 fi
 
-
 # Some defaults
 EDOMI_VERSION=EDOMI_203.tar
 EDOMI_EXTRACT_PATH=/tmp/edomi/
@@ -156,17 +155,19 @@ localectl set-keymap de-nodeadkeys
 timedatectl set-timezone Europe/Berlin
 
 # Configure mariadb
-echo "key_buffer_size=256M" 			> /tmp/tmp.txt
-echo "sort_buffer_size=8M" 				>> /tmp/tmp.txt
-echo "read_buffer_size=16M" 			>> /tmp/tmp.txt
-echo "read_rnd_buffer_size=4M" 			>> /tmp/tmp.txt
-echo "myisam_sort_buffer_size=4M" 		>> /tmp/tmp.txt
-echo "join_buffer_size=4M" 				>> /tmp/tmp.txt
-echo "query_cache_limit=8M" 			>> /tmp/tmp.txt
-echo "query_cache_size=8M" 				>> /tmp/tmp.txt
-echo "query_cache_type=1" 				>> /tmp/tmp.txt
-echo "wait_timeout=28800" 				>> /tmp/tmp.txt
-echo "interactive_timeout=28800" 		>> /tmp/tmp.txt
+cat << EOF > /tmp/tmp.txt
+key_buffer_size=256M
+sort_buffer_size=8M
+read_buffer_size=16M
+read_rnd_buffer_size=4M
+myisam_sort_buffer_size=4M
+join_buffer_size=4M
+query_cache_limit=8M
+query_cache_size=8M
+query_cache_type=1
+wait_timeout=28800
+interactive_timeout=28800
+EOF
 
 # STRICT_TRANS_TABLES (strict mode) needs to be disabled, otherwise statements
 # like this will fail because of the empty values:
@@ -241,3 +242,6 @@ sed -i \
 # Enable Lynx-like motion on Midnight Commander
 mkdir -p /root/.config/mc
 cp ${ownLocation}/configurations/.config/mc/* /root/.config/mc/
+
+# Install Prometheus node exporter
+${ownLocation}/installNodeExporter.sh
