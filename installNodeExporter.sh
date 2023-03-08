@@ -11,7 +11,7 @@ callDir=$(pwd)
 ownLocation="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd ${ownLocation}
 
-NODE_VERSION=1.4.0
+NODE_VERSION=1.5.0
 
 # Determine architecture
 if [ $(uname -m) = 'aarch64' ] ; then
