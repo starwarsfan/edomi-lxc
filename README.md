@@ -70,4 +70,5 @@ using ProxMox web ui.
    cp qemu-aarch64-static /mnt/edomi-arm-container/usr/bin/
    chmod 755 /mnt/edomi-arm-container/usr/bin/qemu-aarch64-static
    chown 100000:100000 /mnt/edomi-arm-container/usr/bin/qemu-aarch64-static
+   umount /mnt/edomi-arm-container
    ```

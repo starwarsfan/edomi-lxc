@@ -1,8 +1,11 @@
 # Releasenotes
 
+## v2.03.7
+* tbd
+
 ## v2.03.6
-* Install stop script into `/usr/local/bin/`, so outside of Edomi location. With that change the script exists even after backup import from native Edomi installation, where that script does not exist.
-* Update node exporter from 1.4.0 to 1.5.0
+* Installed stop script into `/usr/local/bin/`, outside of Edomi location. With that change the script exists even after backup import from native Edomi installation, where that script does not exist.
+* Installed prometheus node exporter
 
 ## v2.03.5
 * Replace obsolete IP of Edomi update site with edomi.de
