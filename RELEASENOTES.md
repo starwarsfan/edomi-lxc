@@ -1,7 +1,7 @@
 # Releasenotes
 
 ## v2.03.7
-* tbd
+* Installed PHP Influx Client for Influx Data Archives LBS 19002576
 
 ## v2.03.6
 * Installed stop script into `/usr/local/bin/`, outside of Edomi location. With that change the script exists even after backup import from native Edomi installation, where that script does not exist.

@@ -117,6 +117,11 @@ mkdir PHPMailer
 cd PHPMailer
 composer require phpmailer/phpmailer --no-interaction
 
+# Influx Data Archives 19002576
+mkdir -p /usr/local/edomi/www/admin/include/php/influx-client
+cd /usr/local/edomi/www/admin/include/php/influx-client
+composer require influxdata/influxdb-client-php
+
 # For Mosquitto-LBS
 mkdir -p /usr/lib64/php/modules/
 cp ${ownLocation}/php-modules${ARCH_SUFFIX}/mosquitto.so /usr/lib64/php/modules/
