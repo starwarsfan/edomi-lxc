@@ -64,6 +64,7 @@ dnf install -y \
     php-xml \
     php-zip \
     python2 \
+    rsync \
     sudo \
     tar \
     unzip \
