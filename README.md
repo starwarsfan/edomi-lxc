@@ -1,8 +1,38 @@
-## Edomi-LXC
+# Edomi-LXC
 
 This is an LXC template containing Edomi, a PHP-based smarthome framework.
 
 For more information please refer to [Official website](http://www.edomi.de/) or [Support forum](https://knx-user-forum.de/forum/projektforen/edomi)
+
+## Create container from template
+
+### Install template
+
+1. Download the [latest release](https://github.com/starwarsfan/edomi-lxc/releases/latest) according to the architecture of your ProxMox installation
+1. On ProxMox
+   1. Select desired storage
+   1. Select type `CT Templates`
+   1. Click `Upload`
+   1. Click `Select File`
+   1. Select the previously downloaded archive
+   1. Upload it
+
+### Create container from template
+
+1. Click `Create CT`
+2. Fill 1st page as you like. Usage of `Unprivileged container` and `Nesting` is fine.
+3. On 2nd page (`Template`) select used storage and choose previously uploaded template
+4. Fill the following pages (Disc, Memory, CPU, Network) according to your needs
+
+The container is now ready to run and Edomi will be available using `http://<ip>/admin`.
+
+It might be neccessary to set the timezone according to your location:
+
+```bash
+timedatectl set-timezone Europe/Berlin
+```
+
+## Build own template
 
 ### Configure container
 
