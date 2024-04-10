@@ -26,6 +26,8 @@ dnf module enable -y \
     php:7.4
 dnf install -y \
     epel-release
+dnf install -y \
+    http://rpms.remirepo.net/enterprise/remi-release-8.rpm
 dnf update -y
 dnf upgrade -y
 dnf clean all
@@ -63,6 +65,7 @@ dnf install -y \
     php-soap \
     php-xml \
     php-zip \
+    php74-php-pecl-mosquitto."$(uname -i)" \
     python2 \
     rsync \
     sudo \

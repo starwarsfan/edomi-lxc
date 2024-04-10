@@ -1,5 +1,11 @@
 # Releasenotes
 
+## v2.03.9
+* Installed php74-php-pecl-mosquitto for LBS 19001054 (MQTT Subscribe Client) and 19001052 (MQTT Subscribe Server)
+
+## v2.03.8
+* Skipped to align with Docker image
+
 ## v2.03.7
 * Installed PHP Influx Client for Influx Data Archives LBS 19002576
 
