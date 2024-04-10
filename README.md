@@ -94,7 +94,7 @@ using ProxMox web ui.
 2. Package `qemu-user-static` must be installed on host
 3. Copy `qemu-aarch64-static` into container filesystem and fix ownership/permission:
    ```bash
-   lvdisplay    # Search LV path of container
+   lvdisplay | grep <container-id>   # Search LV path of container
    mkdir /mnt/edomi-arm-container
    mount <LV-Path> /mnt/edomi-arm-container
    cp qemu-aarch64-static /mnt/edomi-arm-container/usr/bin/
