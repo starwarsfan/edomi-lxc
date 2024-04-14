@@ -1,5 +1,8 @@
 # Releasenotes
 
+## v2.03.10
+* Added missing installation of lib_mysqludf_sys.sql
+
 ## v2.03.9
 * Installed php74-php-pecl-mosquitto for LBS 19001054 (MQTT Subscribe Client) and 19001052 (MQTT Subscribe Server)
 
