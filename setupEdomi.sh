@@ -238,7 +238,8 @@ chmod +x /usr/local/bin/stop_edomi.sh
 
 # Enable lib_mysqludf_sys
 systemctl start mariadb
-mysql -u root mysql < ${ownLocation}/scripts/installdb.sql
+mysql -u root mysql < ${ownLocation}/scripts/installdb_mysqludf_log.sql
+mysql -u root mysql < ${ownLocation}/scripts/installdb_mysqludf_sys.sql
 systemctl stop mariadb
 
 # Tweak some default settings
